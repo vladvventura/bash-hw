@@ -1,0 +1,25 @@
+#!/bin/bash
+
+function main()
+{
+    traverse $1  $b
+}
+
+function traverse()
+{
+    local b=$2
+    cd $1
+    for x in `ls`; do
+	if [ -d "$x"  ]; then #the directory exists
+	    b=("$b""$1/$x")
+	    echo $b
+	    (traverse "$x" "$b")
+	    #echo $1/$x
+	    #(traverse "$x")
+	fi #if the directory doesnt exist, do nothing!
+	done;
+
+}
+
+
+main $1 #directory

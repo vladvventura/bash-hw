@@ -1,0 +1,15 @@
+#!/bin/bash
+
+function main()
+{
+    traverse
+}
+
+function traverse()
+{
+    cd $1
+    echo `ls`
+}
+
+
+main $1

@@ -1,0 +1,14 @@
+#!/bin/sh
+#this version is done by string instead of realtime directories
+
+function main()
+{
+    traverse $1
+}
+
+function traverse()
+{
+    
+}
+
+main $1

@@ -1,0 +1,41 @@
+#!/bin/bash
+#createTable.sh
+#Vladimir Ventura
+#Homework 5
+#CS-288
+#This is to create 60 CSV files from 60 YouTube index.html files.
+#The output of this bash file goes into text files.
+#I used the information from HW2 to do global replacement of , -> MY_COMMA
+#I used the information from HW4 to help with doing this overall.
+
+#So, youtube has organized the views, user, title and time
+#differently for EVERY site update. In other words, one grep won't work for
+#all sites. Because of this, I need to make several greps. Great.
+function main()
+{
+    
+   
+    User="User" Views="Views" Time="Time" Title="Title"
+    hr="01"
+    min="13"
+    
+    grep data-context-item index-2013-04-08-`echo $hr`-`echo $min`.html | while read x; do
+	tempViews=`expr "$x" : ".*data-context-item-views=\"\([0-9,]*\)"`
+	tempViews=${tempViews//,/}	#take out the commas, dont bother with MY_COMMA
+	#I'm sorting based on Views and turning it into ints anyway, so no need to bother.
+
+	tempU=`expr "$x" : ".*data-context-item-user=\"\(.*\)\""`
+	tempU=${tempU//,/MY_COMMA}
+	
+	tempT=`expr "$x" : ".*data-context-item-time=\"\(.*\)\""`
+	tempT=${tempT//,/MY_COMMA}
+	
+	tempTitle=`expr "$x" : ".*data-context-item-title=\"\(.*\)\">"`
+	tempTitle=${tempTitle//,/MY_COMMA}
+
+	echo $tempViews","$tempU","$tempT","$tempTitle >> table.txt;
+    done
+
+}
+
+main

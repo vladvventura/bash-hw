@@ -1,0 +1,12 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <openmpi.h>
+
+int main(int argc, char **argv) {
+  build_a_lst(*(argv+1));
+  print_lst(head);		/* prints all the users */
+
+  return 0;
+}
+
